@@ -8,7 +8,7 @@ const API_KEY = process.env.REACT_APP_MY_API_ID;
 
 const App = () => {
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("Prague");
+  const [city, setCity] = useState("Slaný");
 
   const fetchWeather = () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
@@ -32,7 +32,7 @@ const App = () => {
         <h1>My Weather App</h1>
         <CitySelect city={city} onSelect={handleSelect} />
         <div className="weather">
-          {weather !== null || undefined ? <WeatherCurrent weather={weather} city={city} /> : "loading.."}
+          {weather !== null || undefined ? <WeatherCurrent data={weather} city={city} /> : "loading.."}
 
           <div className="weather__forecast" id="predpoved">
             <div className="forecast">
