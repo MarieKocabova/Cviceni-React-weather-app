@@ -19,7 +19,7 @@ const WeatherCurrent = ({ data, city }) => {
           </div>
         </div>
         <div className="weather__section weather__section--icon" id="ikona">
-          <img src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="current weather icon" />
+          <img src={`http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`} alt="current weather icon" />
         </div>
       </div>
       <div className="weather__inner">
