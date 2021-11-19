@@ -5,7 +5,7 @@ const WeatherCurrent = ({ data, city }) => {
   return (
     <div className={data.main.temp < 10 ? "weather__current weather__current--cold" : "weather__current"}>
       <h2 className="weather__city" id="mesto">
-        {city}
+        {`${city}, ${data.sys.country}`}
       </h2>
       <div className="weather__inner weather__inner--center">
         <div className="weather__section weather__section--temp">
