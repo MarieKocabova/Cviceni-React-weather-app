@@ -1,20 +1,7 @@
 import React from "react";
+import { sunrise, sunset } from "../../utils/functions";
 
 const WeatherCurrent = ({ data, city }) => {
-  const sunrise = (unixSunrise) => {
-    const hours = new Date(unixSunrise * 1000).getHours();
-    const minutes = new Date(unixSunrise * 1000).getMinutes();
-    const last2Digits = minutes.toString().padStart(2, "0");
-    return `${hours}:${last2Digits}`;
-  };
-
-  const sunset = (unixSunset) => {
-    const hours = new Date(unixSunset * 1000).getHours();
-    const minutes = new Date(unixSunset * 1000).getMinutes();
-    const last2Digits = minutes.toString().padStart(2, "0");
-    return `${hours}:${last2Digits}`;
-  };
-
   return (
     <div className={data.main.temp < 10 ? "weather__current weather__current--cold" : "weather__current"}>
       <h2 className="weather__city" id="mesto">

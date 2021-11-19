@@ -26,7 +26,6 @@ const App = () => {
       .then((data) => {
         const rawList = data.list;
         const dayForecast = rawList.filter((_, i) => i % 8 === 0);
-        console.log(dayForecast);
         setForecast(dayForecast);
       });
   };
