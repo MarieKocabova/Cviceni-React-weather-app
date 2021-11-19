@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import WeatherCurrent from "./components/WeatherCurrent";
+import WeatherForecast from "./components/WeatherForecast";
 import CitySelect from "./components/CitySelect";
 
 const API_KEY = process.env.REACT_APP_MY_API_ID;
@@ -9,6 +10,7 @@ const API_KEY = process.env.REACT_APP_MY_API_ID;
 const App = () => {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("Slaný");
+  const [forecast, setForecast] = useState(null);
 
   const fetchWeather = () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
@@ -18,8 +20,20 @@ const App = () => {
       });
   };
 
+  const fetchWeatherForecast = () => {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const rawList = data.list;
+        const dayForecast = rawList.filter((_, i) => i % 8 === 0);
+        console.log(dayForecast);
+        setForecast(dayForecast);
+      });
+  };
+
   useEffect(() => {
-    fetchWeather(city);
+    fetchWeather();
+    fetchWeatherForecast();
   }, [city]);
 
   const handleSelect = (city) => {
@@ -32,20 +46,14 @@ const App = () => {
         <h1>My Weather App</h1>
         <CitySelect city={city} onSelect={handleSelect} />
         <div className="weather">
-          {weather !== null || undefined ? <WeatherCurrent data={weather} city={city} /> : "loading.."}
+          {weather !== null || undefined ? <WeatherCurrent data={weather} city={city} /> : "loading..."}
 
           <div className="weather__forecast" id="predpoved">
-            <div className="forecast">
-              <div className="forecast__day">Day, date</div>
-              <div className="forecast__icon">
-                {/* <img
-                src={URL FROM OPEN WEATHER}
-                style={{ height: "100%" }}
-                alt="current weather icon"
-              /> */}
-              </div>
-              <div className="forecast__temp">-- °C</div>
-            </div>
+            {forecast !== null || undefined
+              ? forecast.map((_, idx) => {
+                  return <WeatherForecast data={forecast} idx={idx} key={idx} />;
+                })
+              : "loading..."}
           </div>
         </div>
       </div>
