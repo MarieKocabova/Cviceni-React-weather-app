@@ -5,16 +5,9 @@ export const date = (unixDate) => {
   return `${days[timestamp.getDay()]}, ${timestamp.getDate()} ${months[timestamp.getMonth()]}`;
 };
 
-export const sunrise = (unixSunrise) => {
-  const hours = new Date(unixSunrise * 1000).getHours();
-  const minutes = new Date(unixSunrise * 1000).getMinutes();
-  const last2Digits = minutes.toString().padStart(2, "0");
-  return `${hours}:${last2Digits}`;
-};
-
-export const sunset = (unixSunset) => {
-  const hours = new Date(unixSunset * 1000).getHours();
-  const minutes = new Date(unixSunset * 1000).getMinutes();
+export const sun = (unixSun) => {
+  const hours = new Date(unixSun * 1000).getHours();
+  const minutes = new Date(unixSun * 1000).getMinutes();
   const last2Digits = minutes.toString().padStart(2, "0");
   return `${hours}:${last2Digits}`;
 };

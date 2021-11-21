@@ -1,5 +1,5 @@
 import React from "react";
-import { sunrise, sunset } from "../../utils/functions";
+import { sun } from "../../utils/functions";
 
 const WeatherCurrent = ({ data, city }) => {
   return (
@@ -40,13 +40,13 @@ const WeatherCurrent = ({ data, city }) => {
         <div className="weather__section">
           <h3 className="weather__title">Sunrise</h3>
           <div className="weather__value">
-            <span id="sunrise">{sunrise(data.sys.sunrise)}</span>
+            <span id="sunrise">{sun(data.sys.sunrise)}</span>
           </div>
         </div>
         <div className="weather__section">
           <h3 className="weather__title">Sunset</h3>
           <div className="weather__value">
-            <span id="sunset">{sunset(data.sys.sunset)}</span>
+            <span id="sunset">{sun(data.sys.sunset)}</span>
           </div>
         </div>
       </div>
